@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center;">Личный кабинет</h1>
+    <div style="text-align: center; margin: 0 auto; width: 20%; text-align: left;">
+        <p>Имя пользователя: {{ user.username }}</p>
+        <p>Имя: {{ user.first_name }}</p>
+        <p>Фамилия: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Дата регистрации: {{ user.date_joined }}</p>
+        <p> <a href="{% url 'edit_profile' %}" >Редактировать профиль</a></p>
+        <p> <a href="{% url 'change_password' %}" >Изменить пароль</a></p>
+        <p> <a href="{% url 'delete_profile' %}" >Удалить профиль</a></p>
+    </div>
+
+
+{% endblock %}

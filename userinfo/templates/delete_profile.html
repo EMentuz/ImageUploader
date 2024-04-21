@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if message %}
+  <h1 style="text-align: center;">{{message}}</h1>
+{% else %}
+<div style="text-align: center;">
+  <h1>Удаление профиля</h1>
+  <p>Вы уверены, что хотите удалить свой профиль?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить профиль</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

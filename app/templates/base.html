@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Image Uploader{% endblock %}</title>
+    <!-- добавьте здесь ваши стили -->
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+</head>
+<body>
+    <header>
+        <h1 >Image Uploader</h1>
+        <nav>
+
+            <ul>
+                <li><a href="/">Главная</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'myimages' %}">Мои фото</a></li>
+                    <li><a href="{% url 'add_image' %}">Добавить фото</a></li>
+                    <li><a href="{% url 'userinfo' %}">Личный кабинет</a></li>
+                    <li>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+
+
+                {% else %}
+
+                    <li><a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+                <!-- Добавьте ссылки на другие страницы здесь -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Здесь будет отображаться контент для каждой страницы -->
+        {% endblock %}
+    </main>
+
+</body>
+</html>

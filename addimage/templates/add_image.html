@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление фото{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% if message %}
+            <div style="text-align: center;">
+                <h1>{{ message }}</h1>
+                <p>Перейдите в главное меню для просмотра всех фото</p>
+            </div>
+        {% else %}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Добавить</button>
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+

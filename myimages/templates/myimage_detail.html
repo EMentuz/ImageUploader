@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+   <div class="image-container"> <!-- Добавление контейнера для изображений -->
+       <img src="{{ image.file.url }}">
+       <ul>
+       <h1> {{image.description}} </h1>
+           <li>Категория - {{image.category}}</li>
+           <li> Дата публикации - {{image.updated_at}}</li>
+           <p> <a href="{% url 'change' myimage_id=image.id %}" >Редактировать</a></p>
+
+           <form method="post" action="{% url 'delete_image' image.id %}">
+               {% csrf_token %}
+               <input type="hidden" name="is_deleted" value="true">
+               <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить это изображение?')">Удалить</button>
+           </form>
+
+
+       </ul>
+
+
+    </div>
+
+
+{% endblock %}

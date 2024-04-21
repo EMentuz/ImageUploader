@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="text-align: center;">Галерея изображений</h1>
+
+        <form method="GET" action="{% url 'main' %}">
+            <input type="text" name="search" placeholder="Поиск по описанию">
+            <select name="category">
+                <option value="">Все категории</option>
+                {% for category in categories %} <!-- Создание выпадающего списка -->
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Поиск</button>
+        </form>
+
+        <br>
+        {% if images %}
+        <div class="image-container"> <!-- Добавление контейнера для изображений -->
+            {% for image in images %}
+                <div class="image-item">
+                    <img src="{{ image.file.url }}">
+                    <p class="image-caption">
+                    <a href="{% url 'image_detail' image.id %}">{{ image.description|truncatechars:40 }}</a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3>Пусто(</h3>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+   <div class="image-container"> <!-- Добавление контейнера для изображений -->
+                <img src="{{ image.file.url }}">
+       <ul>
+       <h1> {{image.description}} </h1>
+           <li>Категория - {{image.category}}</li>
+               <li> Дата публикации - {{image.updated_at}}</li>
+              <li>  Автор - {{image.user}}</li>
+       </ul>
+    </div>
+
+
+{% endblock %}

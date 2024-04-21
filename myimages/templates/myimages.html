@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Мои фото{% endblock %}
+
+{% block content %}
+    {% if images %}
+        <div class="image-container"> <!-- Добавление контейнера для изображений -->
+            {% for image in images %}
+                <div class="image-item">
+                    <img src="{{ image.file.url }}">
+                    <p class="image-caption">
+                    <a href="{% url 'my_image_detail' image.id %}">{{ image.description|truncatechars:40 }}</a>
+                    </p>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div style="text-align: center;">
+            <h1>У Вас пока нет фото, но Вы можете их <a href="{% url 'add_image' %}">добавить</a></h1>
+        </div>
+    {% endif %}
+{% endblock %}

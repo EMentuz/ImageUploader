@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Редактирование</h1>
+    <div class="image-container">
+        <img src="{{ image.file.url }}">
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+        </div>
+{% endblock %}
