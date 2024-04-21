@@ -1,6 +1,7 @@
 from django.shortcuts import render,  get_object_or_404
 from .forms import UserRegistrationForm
 from .models import Image, Category
+from .decorators import anonymous_required
 
 
 # Create your views here.
@@ -20,10 +21,12 @@ def main(request):
     return render(request, 'main.html', {'images': images, 'categories': categories})
 
 
-def login(request):
-    return render(request, 'login.html')
+# @anonymous_required
+# def login(request):
+#     return render(request, 'login.html')
 
 
+@anonymous_required
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -36,5 +39,6 @@ def register(request):
 
 
 def image_detail(request, image_id):
-    image = Image.objects.get(id=image_id, is_deleted=False)
+    image = get_object_or_404(Image, pk=image_id, is_deleted=False)
+    # image = Image.objects.get(id=image_id, is_deleted=False)
     return render(request, 'image_detail.html', {'image': image})

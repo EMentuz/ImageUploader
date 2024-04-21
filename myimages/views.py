@@ -18,13 +18,15 @@ def myimages(request):
 @login_required
 def my_image_detail(request, myimage_id):
     user = request.user
-    image = Image.objects.get(id=myimage_id, is_deleted=False, user=user,)
+    # image = Image.objects.get(id=myimage_id, is_deleted=False, user=user,)
+    image = get_object_or_404(Image, id=myimage_id, is_deleted=False, user=user)
     return render(request, 'myimage_detail.html', {'image': image})
 
 
 @login_required
 def change(request, myimage_id):
-    image = get_object_or_404(Image, pk=myimage_id)
+    user = request.user
+    image = get_object_or_404(Image, pk=myimage_id, user=user)
     form = ChangeImageForm(request.POST or None, instance=image)
     if request.method == 'POST' and form.is_valid():
         form.save()

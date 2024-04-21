@@ -2,6 +2,8 @@
 {% block title %}Мои фото{% endblock %}
 
 {% block content %}
+<h1 style="text-align: center;">Мои фото</h1>
+
     {% if images %}
         <div class="image-container"> <!-- Добавление контейнера для изображений -->
             {% for image in images %}
@@ -10,7 +12,6 @@
                     <p class="image-caption">
                     <a href="{% url 'my_image_detail' image.id %}">{{ image.description|truncatechars:40 }}</a>
                     </p>
-
                 </div>
             {% endfor %}
         </div>
